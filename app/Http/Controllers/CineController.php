@@ -61,17 +61,11 @@ class CineController extends Controller
     }
 
     public function getCinesInfo(){
-        $cines = Cine::all();
-        $cinesInfo = [];
-        foreach($cines as $cine){
-            $cinesInfo[] = [
-                'idCine' => $cine->idCine,
-                'nombre' => $cine->nombre,
-                'ubicacion' => $cine->ubicacion,
-                'peliculas' => $cine->peliculas()->count(),
-            ];
-        }
-        return response()->json($cinesInfo, 200);
+        $cines = Cine::join('peliculas', 'cines.id', '=', 'peliculas.idCine')
+        ->join('horarios', 'peliculas.id', '=', 'horarios.idPelicula')
+        ->select('cines.id', 'cines.nombre', 'cines.ubicacion', 'peliculas.id as idPelicula', 'peliculas.nombre as nombrePelicula', 'horarios.id as idHorario', 'horarios.hora','horarios.formato')
+        ->get();
+        return response()->json($cines, 200);
     }
     
 }

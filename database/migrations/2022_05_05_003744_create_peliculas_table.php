@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('peliculas', function (Blueprint $table) {
-            $table->bigIncrements('idPelicula');
+            $table->id();
             $table->unsignedBigInteger('idCine');
-            $table->foreign('idCine')->references('idCine')->on('cines')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('idCine')->references('id')->on('cines')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nombre', 60);
             $table->string('categoria', 20);
             $table->integer('duracion');

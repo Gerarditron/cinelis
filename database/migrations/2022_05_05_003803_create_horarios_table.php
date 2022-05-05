@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('horarios', function (Blueprint $table) {
-            $table->bigIncrements('idHorario');
+            $table->id();
             $table->unsignedBigInteger('idPelicula');
-            $table->foreign('idPelicula')->references('idPelicula')->on('peliculas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('idPelicula')->references('id')->on('peliculas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('formato', 30);
             $table->string('hora', 10);
             $table->timestamps();
