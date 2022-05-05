@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        schema::create('horarios', function (Blueprint $table) {
-            $table->id();
+        Schema::create('horarios', function (Blueprint $table) {
+            $table->bigIncrements('idHorario');
             $table->unsignedBigInteger('idPelicula');
             $table->foreign('idPelicula')->references('idPelicula')->on('peliculas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('formato', 30);
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('horarios');
     }
 };

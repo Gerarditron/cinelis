@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CineController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\PeliculaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('cines-info', CineController::class . '@getCinesInfo');
+Route::apiResource('cines', CineController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('peliculas', PeliculaController::class);
+
+Route::apiResource('horarios', HorarioController::class);
